@@ -1,0 +1,81 @@
+ {% extends "forum/base.html" %}
+
+{% block content %}
+
+<body>
+
+
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <h4>{{ post.title }}</h4>
+                    <h6>Post Created By : {{ post.teacher }}</h6>
+
+                </td>
+
+
+
+
+            <tr>
+                <td>
+                    <p>{{ post.body | safe }}</p>
+                </td>
+            </tr>
+
+            <tr>
+            <td>
+            <div class="row">
+                <div class="col s12 m10 offset-m1">
+                    <div class="row">
+                        {% for p in post.images_set.all %}
+                            <div class="col s12 m6 l6">
+                                <img class="materialboxed responsive-img z-depth-1" src="{{ p.image.url }}" alt="Image Not Found">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row image-list">
+
+            </div>
+            </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+    {% if post.teacher == request.user %}
+<div class="fixed-action-btn">
+    <a href="#" class="btn-floating btn-large orange">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <ul>
+
+        <li>
+            <a href="{% url 'forum:post_update' post.id %}"  class="btn-floating btn-large blue">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+        </li>
+        <li>
+                <a href="{% url 'forum:post_delete' post.id %}" class="btn-floating btn-large blue" >
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+{% endif %}
+
+
+
+<br>
+<div class="main-comment-section">
+    {% include "forum/comments.html" %}
+</div>
+<div style="margin-top:200px;">
+
+</div>
+
+{% endblock %}
