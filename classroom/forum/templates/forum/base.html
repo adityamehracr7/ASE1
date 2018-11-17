@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FORUM</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'forum/materialize.css' %}" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" media="screen,projection">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+
+        .navbar{
+            color:blue;
+        }
+    </style>
+    </head>
+    <body>
+
+
+<nav class="navbar">
+<div class="container-fluid">
+
+	<!-- logo -->
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnavbar">
+	    <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="{% url 'post_list' %}">Forum</a>
+	</div>
+
+	<div class="collapse navbar-collapse" id="topnavbar">
+	  <ul class="nav navbar-nav">
+	    <li class="">
+		  <a href="{% url 'post_list' %}">
+            <span class="glyphicon glyphicon-cd" aria-hidden="true" ></span>&nbsp
+ 		    User Post
+		  </a>
+		</li>
+
+	</ul>
+
+
+	<ul class="nav navbar-nav navbar-right">
+		<li class="">
+		  <a href="{% url 'forum:post_create' %}">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>&nbsp
+ 		    Create New Post
+		  </a>
+		</li>
+
+	</ul>
+
+
+    </div>
+
+	</div>
+</nav>
+
+
+
+    {% block content %}
+
+        {% endblock %}
+
+
+
+        <footer class="page-footer font-small teal">
+          <div class="footer-copyright ">
+            <div class="container">
+            Thanks For Coming
+            <a class="blue-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+
+        <script type="text/javascript">
+
+
+                $('.reply-btn').click(function(){
+                    $(this).parent().parent().next('.replied-comment').fadeToggle()
+                });
+
+
+        </script>
+
+    </body>
+</html>
