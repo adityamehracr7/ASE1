@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to my app</title>
+</head>
+<body>
+<form action="{% url 'Profile.profile' %}" method="post">
+    {%  csrf_token %}
+    course<br>
+    <input type="text" name="cid" id="fullname"><br>
+     course id:<br>
+    <input type="text" name="cname" id="email"><br>
+    <br><br>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
