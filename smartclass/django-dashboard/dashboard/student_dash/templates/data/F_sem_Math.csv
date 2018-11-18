@@ -1,0 +1,17 @@
+,GradeID,SectionID,Topic,Semester,raisedhands,VisITedResources,AnnouncementsView,Discussion,StudentAbsenceDays,Class
+6,G-07,A,Math,F,35,12,0,17,Above-7,L
+7,G-07,A,Math,F,50,10,15,22,Under-7,M
+8,G-07,A,Math,F,12,21,16,50,Under-7,M
+10,G-07,A,Math,F,50,88,30,80,Under-7,H
+11,G-07,B,Math,F,19,6,19,12,Under-7,M
+13,G-08,A,Math,F,20,14,12,19,Above-7,L
+14,G-08,A,Math,F,62,70,44,60,Above-7,H
+17,G-07,A,Math,F,55,13,35,90,Above-7,M
+55,G-07,A,Math,F,16,14,6,20,Above-7,L
+56,G-08,B,Math,F,19,5,4,1,Above-7,L
+57,G-07,A,Math,F,5,2,6,5,Above-7,L
+58,G-07,A,Math,F,28,60,19,50,Under-7,M
+59,G-07,A,Math,F,27,22,22,40,Under-7,M
+72,G-07,A,Math,F,11,2,2,8,Under-7,L
+79,G-07,B,Math,F,80,90,49,55,Under-7,H
+80,G-07,A,Math,F,8,15,10,40,Under-7,L

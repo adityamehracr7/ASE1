@@ -4,6 +4,8 @@ from .models import table
 from .models import faculty
 from .models import course
 from .models import examtype
+from django.forms import modelformset_factory
+
 import os
 import csv
 from django.shortcuts import render,HttpResponse,redirect
@@ -49,23 +51,35 @@ def create_table(file,id,course_id):
     size=int((len(data)))
     print(size)
     for j in range(size):
-        table.objects.create(student_id=data[j][0],student_name=data[j][1],marks=data[j][2],exam_id=data[j][3],proff_id_id=proff_id,course_id_id=course_id)
+        print(data[j][0])
+        exam=examtype.objects.get(course_id_id=course_id,exam_type=data[j][0]).id
+        table.objects.create(exam_id=exam,student_id=data[j][1],student_name=data[j][2],marks=data[j][3],proff_id_id=proff_id,course_id_id=course_id)
 
 def course_add(request):
+    form1 = modelformset_factory(examtype, fields=('max_marks','exam_type'), extra=5)
     if request.method=='POST':
         form=add_course(request.POST or None)
-        if form.is_valid():
+        formset = form1(request.POST or None)
+        if form.is_valid() and formset.is_valid():
             courses=form.save(commit=False)
             id=request.user.id
             proff = faculty.objects.get(user_id=id)
             proff_id = proff.id
             courses.proff_id_id=proff_id
             courses.save()
+            for file in formset:
+                if file.cleaned_data:
+                    fiveform = examtype(course_id_id=request.POST['course_id'],max_marks=file.cleaned_data.get('max_marks'),exam_type=file.cleaned_data.get('exam_type'))
+                    fiveform.save()
+
+
 
     else:
         form = add_course()
+        formset = form1(queryset=examtype.objects.none())
     return render(request, 'fileindb/take_course.html', {
-        'form': form
+        'form': form,
+        'formset': formset,
     })
 
 
@@ -87,5 +101,4 @@ def add_exams(request,id):
     }
 
     return render(request,'fileindb/add_exam.html',context)
-
 

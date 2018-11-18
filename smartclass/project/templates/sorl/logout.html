@@ -1,0 +1,9 @@
+{% extends "sorl/home.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <h1>You have been logged out</h1><br>
+    <small>
+      <a href="{% url 'login' %}"> login again</a>
+    </small>
+{% endblock %}

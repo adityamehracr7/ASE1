@@ -1,0 +1,16 @@
+SID,GradeID,SectionID,Topic,Semester,raisedhands,VisITedResources,AnnouncementsView,Discussion,StudentAbsenceDays,Class
+390,G-07,A,Biology,F,88,81,50,10,Above-7,M
+392,G-07,A,Biology,F,86,98,50,20,Under-7,H
+394,G-07,A,Biology,F,78,91,50,40,Under-7,H
+396,G-07,A,Biology,F,80,80,46,61,Under-7,M
+398,G-07,A,Biology,F,88,90,86,81,Under-7,H
+400,G-07,A,Biology,F,39,71,40,26,Above-7,M
+402,G-07,A,Biology,F,76,81,80,86,Under-7,H
+404,G-07,A,Biology,F,96,95,70,70,Under-7,H
+406,G-07,A,Biology,F,2,9,10,1,Above-7,L
+408,G-07,B,Biology,F,50,79,10,31,Under-7,M
+410,G-07,B,Biology,F,70,89,12,21,Under-7,H
+412,G-07,B,Biology,F,78,80,66,51,Under-7,M
+414,G-07,B,Biology,F,10,9,2,1,Above-7,L
+416,G-07,B,Biology,F,98,90,86,71,Under-7,H
+418,G-07,B,Biology,F,88,90,76,81,Under-7,H

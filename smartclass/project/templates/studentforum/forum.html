@@ -1,0 +1,12 @@
+{% extends "sorl/home.html" %}
+{% load staticfiles%}
+{% block content %}
+  {% for p in post %}
+    <div class='jumbotron' style="padding:25px">
+      {{ p.Author }}
+      <small class="text-muted">{{ p.Date|date:"F d, Y" }}</small>
+      <h2><a class="article-title" href="{% url 'PostDetail' p.QuestionId %}">{{ p.Title }}</a></h2>
+      <p class="article-content">{{ p.Question }}</p>
+    </div>
+  {% endfor %}
+{% endblock%}
