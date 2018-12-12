@@ -1,0 +1,45 @@
+ {% extends "forum/base.html" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>notif</title>
+</head>
+<body>
+<div style="padding-top:65px">
+{% if count == 0 %}
+    <center><div class="alert alert-info">
+        <h4><strong>No  new  notification.</strong></h4>
+    </div></center>
+{% endif %}
+
+<table class="table table">
+    {% for i in notf %}
+        {% if i.0.is_read == 0 %}
+            <tr class="danger" >
+                <td>
+                    <h5>{{ i.1 }}  commented on the Post  : {{ i.2 }} </h5> <br>
+                </td>
+            </tr>
+        {% endif %}
+        {% if i.0.is_read == 1 %}
+            <tr>
+                <td>
+                    <h5>{{ i.1 }} commented on the Post : {{ i.2 }}</h5> <br>
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+
+
+
+</body>
+</html>
+
+{% endblock %}

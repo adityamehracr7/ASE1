@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+		body
+			{
+				background-image: url("/static/forum/checklist.jpg");
+				background-repeat: no-repeat;
+				background-size: cover;
+			 }
+   </style>
+
+
+
+
+</head>
+
+<body>
+
+
+<table class="table" style="color:black;border-collapse: collapse">
+        <tr>
+            <center><h1>TO DO LIST</h1></center>
+
+        </tr>
+         <tr>
+         <form action="/todo/addTodo/" method="post" >
+            {% csrf_token %}
+             <td><h3>  Type here to add  </h3></td>
+             <td > <h1 style="border: 15px"> <input type="text" name="add"  > </h1>
+                   <input type="submit" value="Add"/>
+             </td>
+             <td >  </td>
+           </form>
+        </tr>
+    </table>
+
+   <table class="table" style="color: #000000">
+
+
+     <thead>
+      <tr>
+        <th>subject</th>
+        <th>date modified</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+{% for todo_item in all_items %}
+    <tr>
+        <td style="background-color: bisque">{{ todo_item.content }} </td>
+        <td style="background-color:burlywood">{{ todo_item.date_created }}</td>
+
+        <td >  <form action="/todo/delTodo/{{ todo_item.id }}"   method="post" > {% csrf_token %}
+               <input type="submit" value="Delete">
+             </form>
+         </td>
+
+    </tr>
+{% endfor %}
+    </tbody>
+ </table>
+</body>
+</html>
+

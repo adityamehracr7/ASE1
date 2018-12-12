@@ -1,0 +1,60 @@
+{% extends 'forum/Profile_base.html' %}
+{% load widget_tweaks %}
+{% block title %}Register {% endblock %}
+
+
+{% block content %}
+{% include 'forum/navbar.html' %}
+
+	<div class="row">
+
+		<div class="col-md-6 student container">
+
+			<div>
+				<img class='images' height=250px >
+			</div>
+			<div id="student_register" class="overlay">
+				<h1 style="">STUDENT SIGNUP</h1>
+				<form action= "{%  url 'forum:student_register'%}" method="POST" class="form1">
+        			{% csrf_token %}<br><br>
+					{{form1.username}}<br>{{ form1.username.errors }}<br>
+					{{form1.first_name}}<br>{{ form1.first_name.errors }}<br>
+					{{form1.last_name}}<br>{{ form1.last_name.errors }}<br>
+					{{form1.email}}<br>{{ form1.email.errors }}<br>
+					{{form1.password1}}<br>{{ form1.password1.errors }}<br>
+					{{form1.password2}}<br>{{ form1.password2.errors }}<br>
+					<input class="reg" type="submit" value="Register">
+				</form>
+			</div>
+
+		</div>
+
+
+		<div class="col-md-6 teacher container">
+
+			<div >
+				<img  class="images"  height=400px>
+			</div>
+			<div id="teacher_register" class="overlay">
+				<h1  style="">PROFESSOR SIGNUP</h1><br>
+				<form action="{% url 'forum:teacher_register' %}" method="POST">
+       				{% csrf_token %}
+
+					{{form.username}}<br>{{ form.username.errors }}<br>
+					{{form.first_name}}<br>{{ form.first_name.errors }}<br>
+					{{form.last_name}}<br>{{ form.last_name.errors }}<br>
+					{{form.email}}<br>{{ form.email.errors }}<br>
+					{{form.password1}}<br>{{ form.password1.errors }}<br>
+					{{form.password2}}<br>{{ form.password2.errors }}<br>
+,m
+					<input class="reg" type="submit" value="Register">
+				</form>
+			</div>
+
+
+		</div>
+	</div>
+
+
+
+{% endblock %}

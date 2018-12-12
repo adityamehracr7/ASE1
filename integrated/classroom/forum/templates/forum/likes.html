@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>likes</title>
+</head>
+<body>
+
+
+
+
+<div class="container like-button">
+    <div class="row">
+        <div class="col s6 m6 l6">
+            <span style="font-family:'Lato';font-size:20px;">{{ total_likes }} Like {{ total_likes|pluralize }}</span>
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'like_post' %}" method="post">
+                {% csrf_token %}
+                {% if request.user == post.teacher %}
+                        <button type="submit" title="You cannot upvote your own post :)" disabled class="btn-floating" id='like' name="post_id" value='{{ post.id }}'>
+                            <i class="far fa-thumbs-up"></i>
+                        </button>
+
+                {% else %}
+                    {% if is_liked %}
+                    <button type="submit" class="btn-floating" id='like' name="post_id" value='{{ post.id }}'>
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                    {% else %}
+                    <button type="submit" class="btn-floating red" id='like' name="post_id" value='{{ post.id }}'>
+                        <i class="far fa-thumbs-up"></i>
+                    </button>
+                    {% endif %}
+                {% endif %}
+            </form>
+            {% endif %}
+        </div>
+        <div class="col s6 m6 l6">
+            <span style="font-family:'Lato';font-size:20px;">{{ total_dislikes }} Dislike {{ total_dislikes|pluralize }}</span>
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'dislike_post' %}" method="post">
+                {% csrf_token %}
+                {% if request.user == post.teacher %}
+                        <button type="submit" title="You cannot downvote your own post :)" disabled class="btn-floating" id='dislike' name="post_id" value='{{ post.id }}'>
+                            <i class="far fa-thumbs-down"></i>
+                        </button>
+
+                {% else %}
+                    {% if is_disliked %}
+                    <button type="submit" class="btn-floating" id='dislike' name="post_id" value='{{ post.id }}'>
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                    {% else %}
+                    <button type="submit" class="btn-floating red" id='dislike' name="post_id" value='{{ post.id }}'>
+                        <i class="far fa-thumbs-down"></i>
+                    </button>
+                    {% endif %}
+                {% endif %}
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

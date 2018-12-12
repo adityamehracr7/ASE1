@@ -1,0 +1,47 @@
+{% extends 'studentforum/base.html' %}
+{% load staticfiles %}
+<!-- {% block css %}
+
+{% endblock %} -->
+
+{% block content %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form.media }}
+            <table>
+            <tr>
+              <td style="font-size:20px">Status</td>
+              <td><div>{{ form.status }}</div></td>
+            </tr>
+            <tr>
+              <td style="font-size:20px">Title</td>
+              <td><div style="width:350px">{{ form.title }}</div></td>
+            </tr>
+            <tr>
+              <td style="font-size:20px">Tags</td>
+              <td><div style="width:350px">{{ form.tags }}</div></td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-bottom:350px">Enter Query</td>
+                <td>{{ form.body }}</td>
+            </tr>
+            {{ formset.management_form }}
+            <tr>
+              <td colspan="2">
+                <div class="row">
+                    {% for f in formset %}
+                        <span class="glyphicon glyphicon-upload">
+                            {{ f.image }}
+                        </span>
+                    {% endfor %}
+                </div>
+              </td>
+            </tr>
+
+            <tr><td>
+        <input type="submit" value="Update" class="btn btn-outline-success btn-post-create">
+        </td></tr></table>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "studentforum/base.html" %}
+
+{% block css %}
+  table, th, td {
+
+    padding:1px;
+  }
+
+  hr{
+    margin-top:1px;
+    margin-bottom:15px;
+  }
+{% endblock %}
+{% block content %}
+<div style="padding-top:50px">
+    <div class="container">
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+
+
+
+    <div class="container">
+        <form action="{% url 'post_list' %}">
+            <div class="input-field">
+                <input type="search" id="search" name="q" required placeholder="Search Any Post here">
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </div>
+
+
+
+    <section class="section section-posts blue lighten-4">
+    <div class="container">
+        <div class="row">
+          <div class="col s12 l12 m12 ">
+              {% for post in all_post %}
+                <div class="jumbotron" id="jumbo">
+                  <table>
+                    <tr>
+                      <td>
+                  <h4><a href="{% url 'studentforum:blog_detail' post.id %}" style="color:#1E90FF ">{{ post.title }}</a></h4></td>
+                  <td><div style="float:right;font-size:18px">{{ post.created_time| date:"F d, Y" }}</div></td><tr></table>
+                  <hr>
+
+                  {% for tags in post.get_tags %}
+                    <div class="chip" style="font-size:15px">
+                        {{ tags }}
+                    </div>
+                  {% endfor %}<small style="font-size:16px"> Posted By : {{ post.student }} </small>
+
+
+                </div>
+              {% endfor %}
+
+
+        </div>
+        </div>
+          </div>
+        </div>
+    </div>
+
+    </section>
+</div>
+
+<script>
+document.getElementsByClassName("jumbotron").addEventListener("mouseover", mouseOver);
+document.getElementsByClassName("jumbotron").addEventListener("mouseout", mouseOut);
+
+function mouseOver() {
+    document.getElementsByClassName("jumbotron").style.background = "grey";
+}
+
+function mouseOut() {
+    document.getElementsByClassName("jumbotron").style.background = "white";
+}
+</script>
+
+{% endblock %}

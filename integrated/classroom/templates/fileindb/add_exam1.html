@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+  display: none;
+}
+        body {
+            padding-top: ;: 50px;
+            padding-right: 50px;
+            background-image: url("/static/img/course.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+label {
+  display: block;
+  font-family: sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  line-height: 1em;
+  width: 10em;
+  margin: .5em;
+  height: 1em;
+  padding: 0 1em;
+  border-radius: .75em;
+  position: relative;
+  overflow: hidden;
+  transition: color 500ms;
+  cursor: pointer;
+}
+
+label:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #DDDCDF;
+  z-index: -2;
+}
+
+label:after {
+  content: "\f00c";
+  text-align: right;
+  padding-right: .5em;
+  position: absolute;
+  font-family: FontAwesome;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: 100%;
+  border-radius: .75em;
+  background-color: cornflowerblue;
+  color: #98ECA3;
+  z-index: -1;
+  transition-property: left, right, color;
+  transition-duration: 500ms;
+}
+
+input:checked + label {
+  color: black  ;
+}
+
+input:checked + label:after {
+  left: 0;
+  right: 0;
+  color: deepskyblue;
+}
+
+
+    </style>
+
+    <meta charset="UTF-8">
+    <title>add</title>
+</head>
+<body>
+<script >
+    $(document).ready(function(){
+        $("input[type='submit']").click(function(){
+            var vals =("input[name='cname']:checked").val();
+            alert(vals);
+        })
+    })
+</script>
+<div style="font-family: sans-serif;text-align:center;color:black;font-weight: bold;">Pick a course to upload</div>
+{#<form method="post">#}
+{#{% csrf_token %}#}
+{#{% for cou in ur_courses %}#}
+{#    {{ cou.course_name }}<input type="radio" name="cname" value="{{ cou.course_id }}">#}
+{#    <br>#}
+{#{% endfor %}#}
+{#<input type="submit" value="submit">#}
+{##}
+{#</form>#}
+
+<center>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for cou in ur_courses %}
+            <input type="radio" id="{{ cou.course_id }}" name="cname" value="{{ cou.course_id }}"><label for="{{ cou.course_id }}">{{ cou.course_name }}</label>
+        {% endfor %}
+        <button type="submit">Submit</button>
+
+    </form>
+
+</center>
+
+</body>
+</html>

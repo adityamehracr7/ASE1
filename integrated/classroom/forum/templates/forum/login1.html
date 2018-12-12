@@ -1,0 +1,28 @@
+{% extends 'forum/base.html' %}
+{% block title %}Login {% endblock %}
+
+
+
+ 	{% block content %}
+	{% include 'forum/navbar.html' %}
+<div class="container">
+	<div class="log">
+		<br><br>
+		<form method="POST" class="w3-container">
+			{% csrf_token %}
+			<label>USERNAME</label><br>
+
+			{{form.username}}<br>{{form.username.errors}}<br>
+
+			<label>PASSWORD</label><br>
+			{{form.password}}<br>{{form.password.errors}}<br>
+
+			<button class='btn-general btn-profile' type="submit">LOGIN</button>
+		</form>
+		<a href="{% url 'forum:forget' %}">forget password?</a>
+	</div>
+</div>
+
+
+
+	{% endblock %}

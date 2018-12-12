@@ -1,0 +1,25 @@
+
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form.media }}
+            <table>
+            <tr>
+              <td style="font-size:20px">Title</td>
+              <td><div style="width:350px">{{ form.title }}</div></td>
+            </tr>
+            <tr>
+              <td style="font-size:20px">Tags</td>
+              <td><div style="width:350px">{{ form.tags }}</div></td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-bottom:350px">Enter Query</td>
+                <td>{{ form.body }}</td>
+            </tr>
+
+            <tr><td>
+        <input type="submit" value="Create" class="btn btn-outline-success btn-post-create">
+        </td></tr></table>
+    </form>
+</div>

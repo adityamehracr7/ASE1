@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            .dc-chart { font-size: 12px; }
+            .dc-table-group { padding-left: 10px; font-size: 14px; font-weight: bold; }
+            .dc-table-column { padding-left: 10px; font-size: 12px; font-weight: normal; }
+    </style>
+   
+    <link href="{% static 'lib/dc.min.css' %}" rel="stylesheet">
+    <link href="{% static 'docs/assets/css/materialize.min.css' %}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .x-axis-label, .y-axis-label {
+            fill: #95a5a6;
+            font-size: 10px;
+        }
+
+        .dc-chart g.row text {
+            fill: #2c3e50;
+            font-size: 9px;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+
+        .dc-chart .pie-slice {
+            fill: #2c3e50;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+
+        .axis path {
+            stroke: #95a5a6;
+        }
+
+    </style>
+
+     <title>HOME Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .navbar {
+            margin-bottom: 0;
+            background-color: #004b93;
+            font-size: 16px;
+            letter-spacing: 4px;
+            border-radius: 2px;
+        }
+
+        .mynavbar li a, .navbar .navbar-brand {
+            color: #fff
+        }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: #004b93 !important;
+            background-color: #fff !important;
+        }
+
+        .navbar-default .navbar-toggle {
+
+            color: #fff
+
+        }
+    </style>
+</head>
+<body>
+    
+<script src="{% static 'lib/crossfilter.min.js' %}"></script>
+<script src="{% static 'lib/d3.min.js' %}"></script>
+<script src="{% static 'lib/dc.min.js' %}"></script>
+<script src="{% static 'JS/dashboard.js' %}"></script>
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'blog_list' %}">Students Forum</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right" >
+                <li><a href="#" style="color:white">{{ name }}</a></li>
+
+                <li><a href="{% url 'todoView' %}" style="color:white">TO-DO LIST</a></li>
+
+
+                <li><a href="{% url 'post_list' %}" style="color:white">FORUMS</a></li>
+                <li ><a  href="{% url 'add_course' %}" style="color:white">ADD COURSES</a></li>
+                <li ><a  href="{% url 'add_exams' id %}" style="color:white">UPLOAD CSV</a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" id="menu1" data-toggle="dropdown" style="color:white">PROFILE
+                        <b class="caret"></b> </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                        <li > </li>
+
+                        <li ><a  href="{% url 'user_logout' %}">Logout</a ></li>
+                        <li  role="presentation" class="divider"></li>
+                        <li ><a  href="">About Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+<div class="container">
+
+    <p class="flow-text">Welcome</p>
+    
+    <br/>
+    
+{#    <script >#}
+{#            $(document).ready(function(){#}
+{#                $("input[type='submit']").click(function(){#}
+{#                    var vals =("input[name='cname']:checked").val();#}
+{#                    alert(vals);#}
+{#                })#}
+{#            })#}
+{#        </script>#}
+{#        Here are ur courses#}
+{#        <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {% for cou in ur_courses %}#}
+{#            {{ cou.course_name }}<input type="radio" name="cname" value="{{ cou.course_id }}">#}
+{#            <br>#}
+{#        {% endfor %}#}
+{#        <input type="submit" value="submit">#}
+{#        </form>#}
+        
+    <div class="row">
+
+        <div class="col s12 ">
+            <div id="raisedhands">
+                <!--This will be filled later-->
+                asd
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col s4">
+            <div id="linechart">
+
+            </div>
+        </div>
+
+        <div class="col s4">
+            <h2>Attendence</h2>
+            <div id="attendence">
+
+            </div>
+        </div>
+
+        <div class="col s4">
+            <div id="raisedhands">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div>
+        <div style = "width: 600px;">
+           <div id = "mystats" class = "dc-data-count" style = "float: right">
+              <span class = "filter-count"></span> selected out of <span
+              class = "total-count"></span> <a href = "javascript:dc.filterAll();
+              dc.renderAll();">Reset All</a>
+
+        <div style = "clear: both; padding-top: 20px;">
+           <div>
+              <div id = "line"></div>
+           </div>
+        </div>
+
+        <div style = "clear: both">
+           <div id = "mytable"></div>
+        </div>
+     </div>
+        </div>
+</div>
+<script>
+    performancedata.crossfilter();
+</script>
+
+</body>
+</html>

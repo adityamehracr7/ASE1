@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FORUM</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'forum/materialize.css' %}" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="{% static 'forum/style.css' %}" media="screen,projection">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <style>
+
+            /* .navbar{
+                color:blue;
+            } */
+            .navbar {
+                margin-bottom: 0;
+                background-color: #1E90FF;
+                font-size: 16px;
+                letter-spacing: 4px;
+                border-radius: 2px;
+                width:100%;
+                height:5px;
+            }
+
+            .mynavbar li a, .navbar .navbar-brand {
+                color: #fff
+            }
+
+            .navbar-nav li a:hover, .navbar-nav li.active a {
+                color: #004b93 !important;
+                background-color: #fff !important;
+            }
+
+            .navbar-default .navbar-toggle {
+
+                color: #fff
+
+            }
+
+            .jumbotron{
+              padding-top: 10px;
+              padding-left: 1px;
+              padding-right: 15px;
+              padding-bottom: 15px;
+              margin-bottom: 10px;
+              background-color: white;
+            }
+
+            {% block css %}
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+
+
+
+          <nav class="navbar navbar-default navbar-fixed-top">
+              <div class="container" >
+                  <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="{% url 'teacher_page' %}">HOME</a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="myNavbar">
+                      <ul class="nav navbar-nav navbar-right" >
+
+
+
+                          <li><a href="{% url 'post_list' %}" style="color:white">FORUMS</a></li>
+                          <li ><a  href="{% url 'user_post_list' %}" style="color:white">Your Post</a></li>
+                          <li ><a  href="{% url 'forum:post_create' %}" style="color:white">CREATE POST</a></li>
+                          <li><a href="{% url 'see_notif' %}" style="color:white"><span class="glyphicon glyphicon-bell"></span></a>
+                          <li ><a  href="{% url 'user_logout' %}" style="color:white">Logout</a ></li>
+                          <li ><a  href="" style="color:white">About Us</a></li>
+
+
+                      </ul>
+                  </div>
+              </div>
+          </nav>
+
+
+
+
+
+
+
+    {% block content %}
+
+        {% endblock %}
+
+
+<!--
+        <footer class="page-footer font-small teal">
+          <div class="footer-copyright ">
+            <div class="container">
+            Thanks For Coming
+            <a class="blue-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer> -->
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+
+        <script type="text/javascript">
+
+
+                $('.reply-btn').click(function(){
+                    $(this).parent().parent().next('.replied-comment').fadeToggle()
+                });
+
+                $(function(){
+                    setTimeout(function(){
+                        $('.alert').slideUp(2000);
+                    }, 3000);
+                });
+
+                $(document).on('click','#like', function(event){
+                    event.preventDefault();
+                    var pk = $(this).attr('value');    <!-- Gives {{post.id}} -->
+                    $.ajax({
+                        type:'POST',
+                        url:'{% url 'like_post' %}',
+                        data:{'id':pk,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        dataType: 'json',
+                        success: function(response){
+                            $('#like-section').html(response['form'])
+                            console.log($('#like-section').html(response['form']));
+                        },
+                        error: function(rs, e){
+                            console.log(rs.responseText);
+                        },
+                    });
+                });
+
+                $(document).on('click','#dislike', function(event){
+                    event.preventDefault();
+                    var pk = $(this).attr('value');    <!-- Gives {{post.id}} -->
+                    $.ajax({
+                        type:'POST',
+                        url:'{% url 'dislike_post' %}',
+                        data:{'id':pk,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        dataType: 'json',
+                        success: function(response){
+                            $('#like-section').html(response['form'])
+                            console.log($('#like-section').html(response['form']));
+                        },
+                        error: function(rs, e){
+                            console.log(rs.responseText);
+                        },
+                    });
+                });
+
+
+
+
+        </script>
+
+    </body>
+</html>

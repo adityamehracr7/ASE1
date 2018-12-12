@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do App</title>
+    {% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(".fa-pencil").click(function() {
+  $("input[type='text']").fadeToggle();
+});
+
+$("input[type='text']").keypress(function(e) {
+  if (e.which === 13) {     // 13 is the enter key
+    var toDoText = $(this).val();
+    $(this).val("");
+    $("ul").append("<li><span><i class='fa fa-eraser' aria-hidden='true' title='erase'></i></span> " + toDoText + "</li>");
+  }
+});
+
+$("ul").on("click", "li", function() {
+  $(this).toggleClass("completed");
+});
+
+$("ul").on("click", "span", function(e) {
+  $(this).parent().fadeOut(500, function() {
+    $(this).remove();
+  });
+  e.stopPropagation();
+});
+
+    </script>
+</head>
+
+<body style="width:50%;">
+
+
+
+
+<div id="container" >
+<form action="/todo/addTodo/" method="post" >
+    {% csrf_token %}
+
+    <h1>ToDo List <i class="fa fa-pencil" aria-hidden="true"><img src="{% static 'img/pencil.png'  %}" style='width:30px'></img></i></h1>
+    <input type="text" name="add"  placeholder="Add New ToDo"><button type="submit" style="float:right;border-radius: 30%;display: none;color:#8E0E00;background-color:white">save</button>
+</form>
+    <ul>
+
+{% for todo_item in all_items %}
+    <li><span><a href="{% url 'delTodo' todo_item.id %}"><i class="fa fa-eraser" aria-hidden="true" title="erase"><img src="{% static 'img/eraser.png' %}" style="width:30px"></a></span>{{ todo_item.content }} {{ todo_item.date_created }}</li>
+
+{% endfor %}
+        </ul>
+    </div>
+    <!-- jquery-3.2.1.min.js -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- toDoList.js -->
+    <script type="text/javascript" src="assets/js/toDoList.js"></script>
+
+
+
+</body>
+
+
+
+
+</html>

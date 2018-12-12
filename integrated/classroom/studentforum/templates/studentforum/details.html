@@ -1,0 +1,61 @@
+ {% extends "studentforum/base.html" %}
+
+{% block content %}
+
+
+
+<div style="padding-top:65px">
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <h4>TITLE :   {{ post.title }}</h4>
+                    <br>
+                   <strong> <h6>Post Created By : {{ post.student}}</h6></strong><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>BODY:</strong>{{ post.body | safe }}
+                </td>
+            </tr>
+
+
+
+        </table>
+    </div>
+
+
+    {% if post.student == request.user %}
+<div class="fixed-action-btn">
+    <a href="#" class="btn-floating btn-large orange">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+    <ul>
+
+        <li>
+            <a href="{% url 'studentforum:blog_update' post.id %}"  class="btn-floating btn-large blue">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+        </li>
+        <li>
+                <a href="{% url 'studentforum:blog_delete' post.id %}" class="btn-floating btn-large blue" >
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+{% endif %}
+
+
+
+<br>
+<div class="main-comment-section">
+    {% include "studentforum/comments.html" %}
+</div>
+<div style="margin-top:200px;">
+
+</div>
+</div>
+
+{% endblock %}
